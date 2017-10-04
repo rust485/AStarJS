@@ -101,7 +101,7 @@ class Map
 							neighbor.inHeap = true;
 						}
 
-						let score = n.g + map.aStarAsDijk({x: 0, y: 0}, {x: 30, y: 30});
+						let score = n.g + 1;
 						if (score < neighbor.g)
 						{
 							neighbor.setFrom(n);
