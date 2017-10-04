@@ -1,0 +1,76 @@
+<head>
+  <script src="./js/Heap.js"></script>
+  <script src="./js/Map.js"></script>
+</head>
+<body>
+  <script>
+    getString = function(arr)
+    {
+      let grid = "";
+      for (let y = 0; y < arr.length; y++)
+      {
+        let row = "";
+        for (let x = 0; x < arr[0].length; x++)
+        {
+          let letter;
+          if (arr[y][x] % 10 == 0)
+            letter = 'O';
+          else if (arr[y][x] == '#')
+            letter = '#';
+          else
+            letter = '=';
+
+          row += letter + " ";
+        }
+        grid += row + "\n";
+      }
+
+      return grid;
+    }
+
+    let size = { x: 100, y: 100 };
+
+    let arr = [];
+    let star = [];
+    let dijk = [];
+    for (let y = 0; y < size.y; y++)
+    {
+      arr.push([]);
+      star.push([]);
+      dijk.push([]);
+      for (let x = 0; x < size.x; x++)
+      {
+        let rand = Math.floor(Math.random() * 100);
+        star[y].push(rand);
+        arr[y].push(rand);
+        dijk[y].push(rand);
+      }
+    }
+    let map = new Map(arr);
+
+    console.time("A*");
+    var pathStar = map.aStar({x: 0, y: 0}, {x: size.x - 1, y: size.y - 1});
+    console.timeEnd("A*");
+
+    console.time("Dijk");
+    var pathDijk = map.aStarAsDijk({x: 0, y: 0}, {x: size.x - 1, y: size.y - 1});
+    console.timeEnd("Dijk");
+
+    for (let i = 0; i < pathStar.length; i++)
+    {
+      var posX = pathStar[i].position.x;
+      var posY = pathStar[i].position.y;
+      star[posY][posX] = "#";
+    }
+
+    for (let i = 0; i < pathDijk.length; i++)
+    {
+      var posX = pathDijk[i].position.x;
+      var posY = pathDijk[i].position.y;
+      dijk[posY][posX] = "#";
+    }
+    console.log("A*: \n" + getString(star));
+    console.log("Dijk: \n" + getString(dijk));
+
+  </script>
+</body>
