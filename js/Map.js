@@ -100,8 +100,14 @@ class Map
 							heap.insert(neighbor);
 							neighbor.inHeap = true;
 						}
+						let cost;
 
-						let score = n.g + 1;
+            // if the neighbor is diagonal, it will cost more (2 root(2))
+            if (neighbor.x != n.x && neighbor.y != n.y)
+              cost = 2 * Math.sqrt(2);
+            else
+              cost = 1;
+						let score = n.g + cost;
 						if (score < neighbor.g)
 						{
 							neighbor.setFrom(n);
