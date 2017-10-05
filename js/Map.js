@@ -104,7 +104,7 @@ class Map
 
             // if the neighbor is diagonal, it will cost more (2 root(2))
             if (neighbor.x != n.x && neighbor.y != n.y)
-              cost = 2 * Math.sqrt(2);
+              cost = Math.sqrt(2);
             else
               cost = 1;
 						let score = n.g + cost;
@@ -172,8 +172,14 @@ class Map
 							heap.insert(neighbor);
 							neighbor.inHeap = true;
 						}
+						let cost;
 
-						let score = n.g + this.hardnessMap[y][x];
+            // if the neighbor is diagonal, it will cost more (2 root(2))
+            if (neighbor.x != n.x && neighbor.y != n.y)
+              cost = Math.sqrt(2);
+            else
+              cost = 1;
+						let score = n.g + cost;
 						if (score < neighbor.g)
 						{
 							neighbor.setFrom(n);
