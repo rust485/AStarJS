@@ -53,7 +53,7 @@ class Map
 
 	aStar(start, finish, speed)
 	{
-    var heap = new Heap(pathNodeComp);
+    		var heap = new Heap(pathNodeComp);
 
 		let pathNodes = []; //2d array of PathNodes, representing each position in grid
 		for (let y = 0; y < this.hardnessMap.length; y++)
@@ -61,19 +61,19 @@ class Map
 			pathNodes.push([]);
 			for (let x = 0; x < this.hardnessMap[0].length; x++)
 			{
-        pathNodes[y].push(new PathNode(this.hardnessMap[y][x],
+       		 		pathNodes[y].push(new PathNode(this.hardnessMap[y][x],
 				{
 					x: x,
 					y: y
 				}));
-      }
+      			}
 		}
 
 		pathNodes[start.y][start.x].setG(0);
 		pathNodes[start.y][start.x].setF(heuristic(start.y, start.x, finish));
 		heap.insert(pathNodes[start.y][start.x]);
 		pathNodes[start.y][start.x].inHeap = true;
-    let n;
+   		let n;
 		while (n = heap.pop())
 		{
 			if (n.position.x == finish.x && n.position.y == finish.y)
@@ -102,11 +102,11 @@ class Map
 						}
 						let cost;
 
-            // if the neighbor is diagonal, it will cost more (2 root(2))
-            if (neighbor.x != n.x && neighbor.y != n.y)
-              cost = Math.sqrt(2);
-            else
-              cost = 1;
+            					// if the neighbor is diagonal, it will cost more (2 root(2))
+            					if (neighbor.x != n.x && neighbor.y != n.y)
+              						cost = Math.sqrt(2);
+            					else
+              						cost = 1;
 						let score = n.g + cost;
 						if (score < neighbor.g)
 						{
@@ -174,11 +174,11 @@ class Map
 						}
 						let cost;
 
-            // if the neighbor is diagonal, it will cost more (2 root(2))
-            if (neighbor.x != n.x && neighbor.y != n.y)
-              cost = Math.sqrt(2);
-            else
-              cost = 1;
+            					// if the neighbor is diagonal, it will cost more (2 root(2))
+            					if (neighbor.x != n.x && neighbor.y != n.y)
+              						cost = Math.sqrt(2);
+            					else
+              						cost = 1;
 						let score = n.g + cost;
 						if (score < neighbor.g)
 						{
